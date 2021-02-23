@@ -1,0 +1,18 @@
+on: push
+jobs:
+  curl:
+    runs-on: ubuntu-latest
+    steps:
+    - run: export time=$(($(date +%s%N)/1000))
+    - run: echo $time
+    - name: Use curl download
+      uses: wei/curl@master
+      with:
+        args: curl https://ibus.nsysu.edu.tw/API/RoutePath.aspx\?$time\&T=SC -o tmp.json
+    - run: rm bus_info_data_zh.json
+    - name: Use JD
+      uses: r26d/jq-action@master
+      with:
+        cmd: jq -s '.[0] + .[1]' bus_zh.json tmp.json >> bus_info_data_zh.json
+    - run: rm tmp.json
+    - run: echo bus_info_data_zh.json
