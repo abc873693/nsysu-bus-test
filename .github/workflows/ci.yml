@@ -15,7 +15,7 @@ jobs:
     - name: Use JD
       uses: r26d/jq-action@master
       with:
-        cmd: jq -s '.[0] + .[1]' bus_zh.json tmp.json >> bus_info_data_zh.json
+        cmd: jq -s ".[0] + .[1]" bus_zh.json tmp.json >> bus_info_data_zh.json
     - run: rm -f tmp.json
     - name: export json
       run: echo bus_info_data_zh.json
