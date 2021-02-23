@@ -14,7 +14,7 @@ jobs:
       run: sudo apt install -y curl
     - name: Use curl download zh
       run: curl https://ibus.nsysu.edu.tw/API/RoutePath.aspx\?$time\&T=SC -o tmp_zh.json
-    - run: curl https://ibus.nsysu.edu.tw/API/RoutePath.aspx?&C=en&T=SC -o tmp_en.json
+    - run: curl 'https://ibus.nsysu.edu.tw/API/RoutePath.aspx\?$time\&C\=en\&T\=SC' -o tmp_en.json
     - run: rm -f bus_info_data_zh.json
     - name: Use JD
       uses: r26d/jq-action@master
