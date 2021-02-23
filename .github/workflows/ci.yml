@@ -10,10 +10,10 @@ jobs:
       run: mkdir build
     - run: export time=$(($(date +%s%N)/1000))
     - run: echo $time
+    - name: Instal CURL
+      run: sudo apt install -y curl
     - name: Use curl download zh
-      uses: wei/curl@master
-      with:
-        args: https://ibus.nsysu.edu.tw/API/RoutePath.aspx\?$time\&T=SC -o tmp_zh.json
+      run: curl https://ibus.nsysu.edu.tw/API/RoutePath.aspx\?$time\&T=SC -o tmp_zh.json
     - run: curl https://ibus.nsysu.edu.tw/API/RoutePath.aspx?$time\&C=en&T=SC -o tmp_en.json
     - run: rm -f bus_info_data_zh.json
     - name: Use JD
