@@ -1,6 +1,7 @@
 on: push
 jobs:
   curl:
+    name: Crawler NSYSU Bus
     runs-on: ubuntu-latest
     steps:
     - name: Set checkout
