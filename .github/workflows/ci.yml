@@ -3,6 +3,8 @@ jobs:
   curl:
     runs-on: ubuntu-latest
     steps:
+    - name: List files
+      run: ls
     - run: export time=$(($(date +%s%N)/1000))
     - run: echo $time
     - name: Use curl download
@@ -15,4 +17,5 @@ jobs:
       with:
         cmd: jq -s '.[0] + .[1]' bus_zh.json tmp.json >> bus_info_data_zh.json
     - run: rm tmp.json
-    - run: echo bus_info_data_zh.json
+    - name: export json
+      run: echo bus_info_data_zh.json
