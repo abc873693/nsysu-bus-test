@@ -1,0 +1,1 @@
+jq -s '.[0] + .[1]' bus_zh.json tmp.json >> bus_info_data_zh.json
