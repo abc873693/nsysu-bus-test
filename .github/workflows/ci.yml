@@ -13,16 +13,17 @@ jobs:
     - name: Use curl download
       uses: wei/curl@master
       with:
-        args: https://ibus.nsysu.edu.tw/API/RoutePath.aspx\?$time\&T=SC -o tmp.json
+        args: https://ibus.nsysu.edu.tw/API/RoutePath.aspx\?$time\&T=SC -o tmp_zh.json
+    - run: curl https://ibus.nsysu.edu.tw/API/RoutePath.aspx\?$time\&C=en&T=SC -o tmp_en.json
     - run: rm -f bus_info_data_zh.json
     - name: Use JD
       uses: r26d/jq-action@master
       with:
         cmd: jq -n env
-    - name: merge json
-      run: jq -s '.[0] + .[1]' bus_zh.json tmp.json >> build/bus_info_data_zh.json
-      working-directory: ./
-    - run: rm -f tmp.json
+    - name: merge zh json
+      run: jq -s '.[0] + .[1]' bus_zh.json tmp_zh.json >> build/bus_info_data_zh.json
+    - name: merge en json
+      run: jq -s '.[0] + .[1]' bus_en.json tmp_en.json >> build/bus_info_data_en.json
     - name: Deploy
       run: |
         cd build
