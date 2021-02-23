@@ -3,6 +3,8 @@ jobs:
   curl:
     runs-on: ubuntu-latest
     steps:
+    - name: Set checkout
+      uses: actions/checkout@v2
     - name: List files
       run: ls
     - run: export time=$(($(date +%s%N)/1000))
