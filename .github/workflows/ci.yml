@@ -1,10 +1,12 @@
+
+name: Crawler NSYSU Bus
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
     - cron:  '*/5 * * * *'
 jobs:
   curl:
-    name: Crawler NSYSU Bus
+    name: Crawler and Publish
     runs-on: ubuntu-latest
     steps:
     - name: Set checkout
