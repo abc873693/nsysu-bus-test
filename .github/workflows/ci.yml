@@ -5,8 +5,8 @@ jobs:
     steps:
     - name: Set checkout
       uses: actions/checkout@v2
-    - name: List files
-      run: ls
+    - name: mkdir dir
+      run: mkdir build
     - run: export time=$(($(date +%s%N)/1000))
     - run: echo $time
     - name: Use curl download
@@ -19,8 +19,17 @@ jobs:
       with:
         cmd: jq -n env
     - name: merge json
-      run: jq -s '.[0] + .[1]' bus_zh.json tmp.json >> bus_info_data_zh.json
+      run: jq -s '.[0] + .[1]' bus_zh.json tmp.json >> build/bus_info_data_zh.json
       working-directory: ./
     - run: rm -f tmp.json
-    - name: export json
-      run: echo bus_info_data_zh.json
+    - name: Deploy
+      run: |
+        cd build
+        git init
+        git config user.name  "CI"
+        git config user.email "flutter-ci@github.com"
+        git remote add secure-origin https://${{ secrets.ACCESS_TOKEN }}@github.com/abc873693/nsysu-bus-test.git
+        git checkout -b gh-pages
+        git add .
+        git commit -m "Updated site"
+        git push --force secure-origin gh-pages
