@@ -15,7 +15,7 @@ jobs:
     - name: Use curl download zh
       run: curl https://ibus.nsysu.edu.tw/API/RoutePath.aspx\?$time\&T=SC -o tmp_zh.json
     - name: Use curl download en
-      run: curl https://ibus.nsysu.edu.tw/API/RoutePath.aspx?&C=en&T=SC -o tmp_en.json
+      run: curl 'https://ibus.nsysu.edu.tw/API/RoutePath.aspx?&C=en&T=SC' -o tmp_en.json
     - run: rm -f bus_info_data_zh.json
     - name: Use JD
       uses: r26d/jq-action@master
