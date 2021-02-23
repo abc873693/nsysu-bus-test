@@ -15,7 +15,9 @@ jobs:
     - name: Use JD
       uses: r26d/jq-action@master
       with:
-        cmd: bash jq_merge.bash
+        cmd: jq -n env
+    - name: merge json
+      run: jq -s '.[0] + .[1]' bus_zh.json tmp.json >> bus_info_data_zh.json
     - run: rm -f tmp.json
     - name: export json
       run: echo bus_info_data_zh.json
