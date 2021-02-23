@@ -17,7 +17,8 @@ jobs:
       with:
         cmd: jq -n env
     - name: merge json
-      run: jq -s '.[0] + .[1]' ./bus_zh.json ./tmp.json >> bus_info_data_zh.json
+      run: jq -s '.[0] + .[1]' bus_zh.json tmp.json >> bus_info_data_zh.json
+      working-directory: ./
     - run: rm -f tmp.json
     - name: export json
       run: echo bus_info_data_zh.json
